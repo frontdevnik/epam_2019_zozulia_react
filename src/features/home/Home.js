@@ -34,16 +34,21 @@ export default class Home extends Component {
 
   changeLikes = (id, action) => () => {
     let changedMoviesLikes = (action === 'add'
-    ? this.state.movies.map(
-        movie => movie.id === id ? {...movie, likes: movie.likes + 1} : movie
+      ? this.state.movies.map(
+        movie => movie.id === id ? { ...movie, likes: movie.likes + 1 } : movie
       )
-    : this.state.movies.map(
-        movie => movie.id === id ? {...movie, likes: movie.likes - 1} : movie
+      : this.state.movies.map(
+        movie => movie.id === id ? { ...movie, likes: movie.likes - 1 } : movie
       )
     )
+    let choosenFilm = this.state.choosenFilm;
+    if (this.state.choosenFilm && this.state.choosenFilm.id === id) {
+      choosenFilm = changedMoviesLikes.filter(movie => movie.id === id ? movie : null)[0];
+    }
     this.updatedFilms = changedMoviesLikes;
     this.setState({
-      movies: changedMoviesLikes
+      movies: changedMoviesLikes,
+      choosenFilm
     })
   }
 
@@ -57,14 +62,20 @@ export default class Home extends Component {
 
   setRatingStart = (id, count) => () => {
     const currentFilms = [...this.state.movies];
-    const updateFilm = currentFilms.map(movie => movie.id === id ? {...movie, stars: count} : movie)
+    let choosenFilm = this.state.choosenFilm;
+    if (this.state.choosenFilm && this.state.choosenFilm.id === id) {
+      choosenFilm = currentFilms.filter(movie => movie.id === id ? { ...movie, stars: count } : null)[0];
+      choosenFilm.stars = count;
+    }
+    const updateFilm = currentFilms.map(movie => movie.id === id ? { ...movie, stars: count } : movie)
     this.updatedFilms = updateFilm;
     this.setState({
-      movies: updateFilm
+      movies: updateFilm,
+      choosenFilm
     })
   }
 
-  resetSorting= () => {
+  resetSorting = () => {
     const allMovies = [...this.updatedFilms];
     this.setState({
       movies: allMovies
@@ -72,7 +83,7 @@ export default class Home extends Component {
   }
 
   showFullMovieInfo = (id) => () => {
-    const allVisibleFilms =  [...this.state.movies];
+    const allVisibleFilms = [...this.state.movies];
     const choosenFilm = allVisibleFilms.filter(movie => movie.id === id)[0];
     this.setState({
       choosenFilm
@@ -90,7 +101,7 @@ export default class Home extends Component {
     movies: this.state.movies,
   })
 
-  render() {    
+  render() {
     return (
       <Context.Provider value={this.contextsMethods()} >
         <main>
@@ -100,7 +111,7 @@ export default class Home extends Component {
             <Movies />
           </section>
           <section className={style.singleFims}>
-            {this.state.choosenFilm ? <ChosenFilm movie={this.state.choosenFilm}/> : <NoChosenFilm />}
+            {this.state.choosenFilm ? <ChosenFilm movie={this.state.choosenFilm} /> : <NoChosenFilm />}
           </section>
         </main>
       </Context.Provider>
