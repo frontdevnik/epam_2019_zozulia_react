@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-import style from './home.module.scss'
-import { listOfFilms } from '../../utils/helpers'
-import Sorting from '../../components/sorting/Sorting'
-import Movies from '../../components/movies/Movies'
-import ChosenFilm from '../../components/chosenFilm/ChosenFilm'
-import { Context } from '../../context'
-import NoChosenFilm from '../../components/noChosenFilm/NoChosenFilm'
+import React, { Component } from 'react';
+import Sorting from '../../components/sorting/Sorting';
+import Movies from '../../components/movies/Movies';
+import ChosenFilm from '../../components/chosenFilm/ChosenFilm';
+import { Context } from '../../context';
+import NoChosenFilm from '../../components/noChosenFilm/NoChosenFilm';
+import { listOfFilms } from '../../utils/data';
+import style from './home.module.scss';
 
 export default class Home extends Component {
 
