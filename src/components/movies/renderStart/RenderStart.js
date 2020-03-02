@@ -20,6 +20,11 @@ function RenderStar(props) {
     starsCount > 0
       ? stars.push(<div key={i} onClick={setStars(i)} className={style.starActive} />)
       : stars.push(<div key={i} onClick={setStars(i)} className={style.star} />);
+
+  for (let i = 1; i < 6; i++) {
+    starsCount > 0
+      ? stars.push(<div key={i} onClick={setRatingStart(id, i)} className={style.starActive} />)
+      : stars.push(<div key={i} onClick={setRatingStart(id, i)} className={style.star} />);
     starsCount--;
   }
 
