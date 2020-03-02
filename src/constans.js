@@ -3,5 +3,5 @@ export const Routes = {
   LOGIN: '/login',
   REGISTRATION: '/registration',
   MOVIE: '/movie',
-  ACTOR: '/actor'
-}
+  ACTOR: '/actor',
+};
