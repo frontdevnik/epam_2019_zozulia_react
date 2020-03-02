@@ -9,11 +9,11 @@ const enableReduxDevtools = process.browser
     && window.__REDUX_DEVTOOLS_EXTENSION__;
 
 if (enableReduxDevtools) {
-    devTools = window.__REDUX_DEVTOOLS_EXTENSION__();
+  devTools = window.__REDUX_DEVTOOLS_EXTENSION__();
 }
 
 export const configureStore = (initialState = {}) => createStore(
-    rootReducer,
-    initialState,
-    devTools,
+  rootReducer,
+  initialState,
+  devTools,
 );

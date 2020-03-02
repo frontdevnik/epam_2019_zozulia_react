@@ -1,11 +1,11 @@
-import { DELETE_MOVIE, SHOW_ACTOR } from "./types"
+import { DELETE_MOVIE, SHOW_ACTOR } from './types';
 
 export const deleteMovie = (payload) => ({
   type: DELETE_MOVIE,
-  payload
+  payload,
 });
 
 export const showActorInfo = (payload) => ({
   type: SHOW_ACTOR,
-  payload
+  payload,
 });

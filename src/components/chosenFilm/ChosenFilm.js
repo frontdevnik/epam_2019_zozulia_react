@@ -22,18 +22,18 @@ function ChosenFilm(props) {
 
   const editMovie = () => {
     history.push(history.location.pathname + '/edit');
-  }
+  };
 
   const removeMovie = (id) => () => {
     props.deleteMovie(id);
     history.push(Routes.HOMEPAGE);
-  }
+  };
 
   function showActor(actor) {
     return () => {
       props.showActorInfo(actor);
       history.push(Routes.ACTOR + `/${actor.id}`);
-    }
+    };
   }
 
   return (
@@ -92,12 +92,12 @@ ChosenFilm.propTypes = {
 
 const mapStateToProps = state => ({
   movie: state.choosenFilmReducer.choosenFilm,
-  actors: state.moviesReducer.actors
+  actors: state.moviesReducer.actors,
 });
 
 const mapDispatchToProps = ({
   deleteMovie,
-  showActorInfo
+  showActorInfo,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChosenFilm);

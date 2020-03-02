@@ -1,8 +1,8 @@
-import { SHOW_ACTOR } from "./types";
+import { SHOW_ACTOR } from './types';
 
 const initialState = {
   actor: null,
-}
+};
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -14,4 +14,4 @@ export default (state = initialState, action) => {
     default:
       return state;
   }
-}
+};

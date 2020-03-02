@@ -16,9 +16,9 @@ export const Routers = (
     <ProtectedRoutes exact path={Routes.MOVIE + '/:id'} component={Movie} />
     <ProtectedRoutes path={Routes.MOVIE + '/:id/edit'} component={EditMovie} />
     <ProtectedRoutes path={Routes.ACTOR + '/:id'} component={ActorPage} />
-    <Route exact path={Routes.LOGIN} component={LoginPage}/>
-    <Route exact path={Routes.REGISTRATION} component={RegistrationPage}/>
-    <Route exact path='/' component={LoginPage}/>
+    <Route exact path={Routes.LOGIN} component={LoginPage} />
+    <Route exact path={Routes.REGISTRATION} component={RegistrationPage} />
+    <Route exact path='/' component={LoginPage} />
     <Route component={NotFoundPage} />
   </Switch>
 );

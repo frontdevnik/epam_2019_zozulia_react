@@ -7,7 +7,7 @@ function Movie() {
     <section className={styles.singleFims}>
       <ChosenFilm />
     </section>
-  )
+  );
 }
 
 export default Movie;

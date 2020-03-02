@@ -17,7 +17,7 @@ function Header(props) {
     );
     loginLink = (
       <p onClick={() => window.location.reload(true)} className={styles.link}>Log out</p>
-    )
+    );
   } else {
     loginLink = (
       <div>
@@ -42,7 +42,7 @@ Header.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  isLoggin: state.loginReducer.isLoggin
+  isLoggin: state.loginReducer.isLoggin,
 });
 
 export default connect(mapStateToProps)(Header);

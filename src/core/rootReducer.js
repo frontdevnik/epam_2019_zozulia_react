@@ -8,5 +8,5 @@ export default combineReducers({
   moviesReducer,
   choosenFilmReducer,
   loginReducer,
-  actorReducer
+  actorReducer,
 });

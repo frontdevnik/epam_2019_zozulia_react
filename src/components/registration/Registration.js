@@ -10,14 +10,23 @@ function Registration() {
     e.preventDefault();
     const name = document.querySelector('#name').value;
     const password = document.querySelector('#password').value;
+    const incorrectText = document.querySelector('#incorrect');
+
     if (localStorage.getItem(name) === password) {
-      const incorrectText = document.querySelector('#incorrect');
       incorrectText.textContent = 'User already exist';
-    } else {
-      localStorage.setItem(name, password);
-      history.push('/home');
+      return;
+    } else if (!/.{3,}/.test(name)) {
+      incorrectText.textContent = 'The name must have at least 3 characters';
+      return;
+    } else if (!/^[A-Z]\w{3,}$/.test(password)) {
+      incorrectText.textContent = 'The password must have at least 4 characters and start with a capital letter';
+      return;
     }
+
+    localStorage.setItem(name, password);
+    history.push('/home');
   }
+
 
   return (
     <section className={styles.login}>

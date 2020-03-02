@@ -13,7 +13,7 @@ function EditFilm(props) {
 
   const goBack = () => {
     history.goBack();
-  }
+  };
 
   const updatePost = () => {
     const title = document.querySelector('#title').value;
@@ -32,11 +32,11 @@ function EditFilm(props) {
       actorsIds,
       director,
       description,
-    }
+    };
 
     props.editMovie(updatedMovie);
     history.push(Routes.HOMEPAGE);
-  }
+  };
 
   return (
     <form className={styles.editForm}>
@@ -65,7 +65,7 @@ function EditFilm(props) {
         <button type='button' onClick={goBack}>Go back</button>
       </div>
     </form>
-  )
+  );
 }
 
 EditFilm.propTypes = {
