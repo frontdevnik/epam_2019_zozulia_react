@@ -1,0 +1,66 @@
+* {
+  font-family: 'Lacquer', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background: linear-gradient(to top, #c4c5c7 0%, #dcdddf 52%, #ebebeb 100%) no-repeat;
+}
+
+.header {
+  text-align: center;
+}
+
+.films {
+  float: left;
+  width: 70%;
+  padding: 10px;
+}
+
+.singleFims {
+  display: flex;
+  float: right;
+  width: 24%;
+  padding: 10px;
+  margin-top: 235px;
+}
+
+
+@media all and (min-width: 1480px) {
+  .films {
+    width: 1044px;
+  }
+
+  .singleFims {
+    float: none;
+    width: auto;
+  }
+}
+
+@media all and (max-width: 1480px) {
+  .films {
+    width: 720px;
+  }
+
+  .singleFims {
+    float: none;
+    width: auto;
+  }
+}
+
+@media all and (max-width: 1100px) {
+  .films {
+    width: 370px;
+  }
+
+  .singleFims {
+    float: none;
+    width: auto;
+  }
+}
+
+@media all and (max-width: 768px) {
+  .singleFims {
+    flex-direction: column;
+  }
+}
