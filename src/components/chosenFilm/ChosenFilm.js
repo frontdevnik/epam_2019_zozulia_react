@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import RatingStart from '../movies/ratingStart/RatingStart';
 import style from './chosenFilm.module.scss';
@@ -53,4 +54,8 @@ ChosenFilm.propTypes = {
   }).isRequired,
 };
 
-export default ChosenFilm;
+const mapStateToProps = state => ({
+  movie: state.choosenFilmReducer.choosenFilm,
+});
+
+export default connect(mapStateToProps)(ChosenFilm);

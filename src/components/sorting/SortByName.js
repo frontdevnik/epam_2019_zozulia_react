@@ -1,10 +1,11 @@
 import React from 'react';
-import { useOfContext } from '../../context';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { searchByName } from './actions';
 import style from './sorting.module.scss';
 
-
-function SortByName() {
-  const { searchByName } = useOfContext();
+function SortByName(props) {
+  const { searchByName } = props;
 
   return (
     <div className={style.search}>
@@ -22,4 +23,16 @@ function SortByName() {
   );
 }
 
-export default SortByName;
+SortByName.propTypes = {
+  searchByName: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  searchByName: state.searchByName,
+});
+
+const mapDispatchToProps = ({
+  searchByName,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SortByName);

@@ -1,10 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import SortByName from './SortByName';
-import { useOfContext } from '../../context';
+import { sorByLikes, sortByRating, resetSorting } from './actions';
 import style from './sorting.module.scss';
 
-function Sorting() {
-  const { sorByLikes, sortByRating, resetSorting } = useOfContext();
+function Sorting(props) {
+  const { sorByLikes, sortByRating, resetSorting } = props;
+
   return (
     <div className={style.sorting}>
       <h3>Sort movies: </h3>
@@ -16,4 +19,16 @@ function Sorting() {
   );
 }
 
-export default Sorting;
+Sorting.propTypes = {
+  sorByLikes: PropTypes.func.isRequired,
+  sortByRating: PropTypes.func.isRequired,
+  resetSorting: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = ({
+  sorByLikes,
+  sortByRating,
+  resetSorting,
+});
+
+export default connect(null, mapDispatchToProps)(Sorting);
