@@ -500,11 +500,6 @@
       "name": "User",
       "password": "User",
       "id": 4
-    },
-    {
-      "name": "123",
-      "password": "Asd2",
-      "id": 5
     }
   ]
 }
