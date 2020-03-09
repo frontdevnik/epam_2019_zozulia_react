@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import { Routes } from '../../constans';
@@ -7,11 +7,14 @@ import styles from './login.module.scss';
 
 function Login(props) {
   const history = useHistory();
+  const inputName = createRef();
+  const inputPassword = createRef();
 
   const loginUser = (e) => {
     e.preventDefault();
-    const name = document.querySelector('#name').value;
-    const password = document.querySelector('#password').value;
+    const name = inputName.current.value;
+    const password = inputPassword.current.value;
+
     if (localStorage.getItem(name) === password) {
       props.allowLogin();
       history.push('/home');
@@ -28,11 +31,11 @@ function Login(props) {
         <h2 className={styles.formTitle}>Login Form</h2>
         <label>
           Input your name
-          <input id='name' placeholder='Input your name' />
+          <input ref={inputName} placeholder='Input your name' />
         </label>
         <label>
           Input your password
-          <input id='password' type='password' placeholder='Input your password' />
+          <input ref={inputPassword} type='password' placeholder='Input your password' />
         </label>
         <p id='incorrect' className={styles.incorrect}></p>
         <button onClick={loginUser}>Login</button>
