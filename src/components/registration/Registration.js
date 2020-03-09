@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import api from '../../core/callApi';
 import { Routes } from '../../constans';
@@ -6,25 +6,27 @@ import styles from './registration.module.scss';
 
 function Registration() {
   const history = useHistory();
+  const nameInput = createRef();
+  const passwordInput = createRef();
+  const incorrectText = createRef();
 
   let users = api('users').then(({ data }) => users = data);
 
   const regUser = async (e) => {
     e.preventDefault();
-    const name = document.querySelector('#name').value;
-    const password = document.querySelector('#password').value;
-    const incorrectText = document.querySelector('#incorrect');
+    const name = nameInput.current.value;
+    const password = passwordInput.current.value;
 
     if (!/.{3,}/.test(name)) {
-      incorrectText.textContent = 'The name must have at least 3 characters';
+      incorrectText.current.textContent = 'The name must have at least 3 characters';
       return;
     } else if (!/^[A-Z]\w{3,}$/.test(password)) {
-      incorrectText.textContent = 'The password must have at least 4 characters and start with a capital letter';
+      incorrectText.current.textContent = 'The password must have at least 4 characters and start with a capital letter';
       return;
     }
 
     if (users.some(user => user.name === name && user.password === password)) {
-      incorrectText.textContent = 'User already exist';
+      incorrectText.current.textContent = 'User already exist';
       return;
     }
 
@@ -39,13 +41,13 @@ function Registration() {
         <h2 className={styles.formTitle}>Registration Form</h2>
         <label>
           Input your name
-          <input id='name' placeholder='Input your name' />
+          <input ref={nameInput} placeholder='Input your name' />
         </label>
         <label>
           Input your password
-          <input id='password' type='password' placeholder='Input your password' />
+          <input ref={passwordInput} type='password' placeholder='Input your password' />
         </label>
-        <p id='incorrect' className={styles.incorrect}></p>
+        <p ref={incorrectText} className={styles.incorrect}></p>
         <button onClick={regUser}>Register</button>
         <p className={styles.register}>Don't have an account? <Link to={Routes.LOGIN}>Go to login page</Link></p>
       </form>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import { connect } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import api from '../../core/callApi';
@@ -8,6 +8,9 @@ import styles from './login.module.scss';
 
 function Login(props) {
   const history = useHistory();
+  const inputName = createRef();
+  const inputPassword = createRef();
+  const incorrectText = createRef();
 
   if (+localStorage.getItem('isLoggin')) {
     props.allowLogin();
@@ -16,8 +19,8 @@ function Login(props) {
 
   const loginUser = async (e) => {
     e.preventDefault();
-    const name = document.querySelector('#name').value;
-    const password = document.querySelector('#password').value;
+    const name = inputName.current.value;
+    const password = inputPassword.current.value;
 
     const { data: user } = await api(`users?name=${name}&password=${password}`)
     
@@ -26,8 +29,7 @@ function Login(props) {
       localStorage.setItem('isLoggin', 1);
       history.push('/home');
     } else {
-      const incorrectText = document.querySelector('#incorrect');
-      incorrectText.textContent = 'Username or password is invalid';
+      incorrectText.current.textContent = 'Username or password is invalid';
     }
   }
 
@@ -38,13 +40,13 @@ function Login(props) {
         <h2 className={styles.formTitle}>Login Form</h2>
         <label>
           Input your name
-          <input id='name' placeholder='Input your name' />
+          <input ref={inputName} placeholder='Input your name' />
         </label>
         <label>
           Input your password
-          <input id='password' type='password' placeholder='Input your password' />
+          <input ref={inputPassword} type='password' placeholder='Input your password' />
         </label>
-        <p id='incorrect' className={styles.incorrect}></p>
+        <p ref={incorrectText} className={styles.incorrect}></p>
         <button onClick={loginUser}>Login</button>
         <p className={styles.register}>Don't have an account? <Link to={Routes.REGISTRATION}>Go to register page</Link></p>
       </form>
