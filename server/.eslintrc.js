@@ -1,14 +1,14 @@
 module.exports = {
-  extends: ['standard', 'prettier'],
-  plugins: ['prettier'],
+  extends: ["standard", "prettier"],
+  plugins: ["prettier"],
   rules: {
-    'prettier/prettier': [
-      'error',
+    "prettier/prettier": [
+      "error",
       {
         singleQuote: true,
         semi: false,
       },
-    ]
+    ],
   },
-  env: { mocha: true }
-}
+  env: { mocha: true },
+};

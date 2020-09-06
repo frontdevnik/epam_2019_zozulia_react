@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import withTranslation from '../../hocs/withTranslation';
-import styles from './actorInfo.module.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import withTranslation from "../../hocs/withTranslation";
+import styles from "./actorInfo.module.scss";
 
 function ActorInfoUI(props) {
   const { name, imgUrl, biography } = props.actor;
@@ -21,8 +21,8 @@ function ActorInfoUI(props) {
         </p>
       </div>
     </div>
-  )
-};
+  );
+}
 
 ActorInfoUI.propTypes = {
   actor: PropTypes.shape({
@@ -31,9 +31,12 @@ ActorInfoUI.propTypes = {
     biography: PropTypes.string,
     actor_name: PropTypes.string,
     actor_biography: PropTypes.string,
-  })
+  }),
 };
 
-const withTranslationWorlds = withTranslation(['actor_name', 'actor_biography']);
+const withTranslationWorlds = withTranslation([
+  "actor_name",
+  "actor_biography",
+]);
 
 export default withTranslationWorlds(ActorInfoUI);

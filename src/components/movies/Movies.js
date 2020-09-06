@@ -1,23 +1,29 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import RatingStart from './ratingStart/RatingStart';
-import Likes from './likes/Likes';
-import Loading from '../loading/Loading';
-import Error from '../error/Error';
-import { fetchMovies, fetchActors, removeMovieReducer } from './action';
-import style from './movies.module.scss';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
-function Movies(props) {
-  const { movies, fetchMovies, fetchActors, removeMovieReducer, loading, error } = props;
+import RatingStart from "./ratingStart/RatingStart";
+import Likes from "./likes/Likes";
+import Loading from "../loading/Loading";
+import Error from "../error/Error";
+
+import {
+  fetchMovies,
+  fetchActors,
+  removeMovieReducer,
+} from "../../features/movies/actions";
+
+import style from "./movies.module.scss";
+
+export default ({ movies, loading, error }) => {
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    fetchMovies();
-    fetchActors();
-    removeMovieReducer();
-  }, [fetchMovies, fetchActors, removeMovieReducer]);
+    dispatch(fetchMovies());
+    dispatch(fetchActors());
+    dispatch(removeMovieReducer());
+  }, [dispatch]);
 
   if (loading && !movies) {
     return <Loading />;
@@ -35,8 +41,9 @@ function Movies(props) {
           <h2
             className={style.title}
             onClick={() => {
-              history.push('/movie/' + movie.id);
-            }}>
+              history.push(`/movie/${movie.id}`);
+            }}
+          >
             {movie.title}
           </h2>
           <Likes likes={movie.likes} id={movie.id} movie={movie} />
@@ -45,27 +52,4 @@ function Movies(props) {
       ))}
     </section>
   );
-}
-
-Movies.propTypes = {
-  movies: PropTypes.array,
-  loading: PropTypes.bool,
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf([null]),
-  ]),
 };
-
-const mapStateToProps = (state) => ({
-  movies: state.moviesReducer.movies,
-  loading: state.moviesReducer.loading,
-  error: state.moviesReducer.error,
-});
-
-const mapDispatchToProps = ({
-  fetchMovies,
-  fetchActors,
-  removeMovieReducer,
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Movies);

@@ -1,50 +1,70 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import api from '../../core/callApi';
-import { allowLogin } from './actions';
-import LoginUI from './LoginUI';
+import React from "react";
+import { Link } from "react-router-dom";
+import { Form, Field, reduxForm } from "redux-form";
+import withTranslation from "../../hocs/withTranslation";
 
-function Login(props) {
-  const history = useHistory();
-  const { allowLogin } = props;
+import { REGISTRATION_PAGE } from "../../constants/path-constans";
 
-  if (+localStorage.getItem('isLoggin')) {
-    allowLogin();
-    history.push('/home');
-  }
+import styles from "./login.module.scss";
 
-  const loginUser = async (e) => {
-    e.preventDefault();
-    const name = document.querySelector('#name').value;
-    const password = document.querySelector('#password').value;
+const Login = ({
+  login_title,
+  login_name,
+  login_password,
+  login_button,
+  form_noAccount,
+  form_title,
+  link_to_registration,
+  login_name_placeholder,
+  login_password_placeholder,
+  handleSubmit,
+  onSubmit,
+  errorText,
+}) => (
+  <section className={styles.login}>
+    <h1 className={styles.header}>{form_title}</h1>
+    <Form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <h2 className={styles.formTitle}>{login_title}</h2>
+      <label>
+        {login_name}
+        <Field
+          name="name"
+          component="input"
+          placeholder={login_name_placeholder}
+        />
+      </label>
+      <label>
+        {login_password}
+        <Field
+          name="password"
+          component="input"
+          type="password"
+          placeholder={login_password_placeholder}
+        />
+      </label>
+      <p id="incorrect" className={styles.incorrect}>
+        {errorText}
+      </p>
+      <button>{login_button}</button>
+      <p className={styles.register}>
+        {form_noAccount}
+        <Link to={REGISTRATION_PAGE}> {link_to_registration}</Link>
+      </p>
+    </Form>
+  </section>
+);
 
-    const { data: user } = await api(`users?name=${name}&password=${password}`);
+const withForm = reduxForm({ form: "Login" });
+const withTranslationWorlds = withTranslation([
+  "login_title",
+  "login_name",
+  "login_password",
+  "login_button",
+  "form_noAccount",
+  "form_title",
+  "link_to_registration",
+  "login_name_placeholder",
+  "login_password_placeholder",
+]);
 
-    if (user.length) {
-      allowLogin();
-      localStorage.setItem('isLoggin', 1);
-      history.push('/home');
-    } else {
-      const incorrectText = document.querySelector('#incorrect');
-      incorrectText.textContent = 'Username or password is invalid';
-    }
-  };
-
-  return (
-    <LoginUI loginUser={loginUser} />
-  );
-}
-
-Login.propTypes = {
-  allowLogin: PropTypes.func,
-};
-
-const mapDispatchToProps = ({
-  allowLogin,
-});
-
-const withConnect = connect(null, mapDispatchToProps);
-
-export default withConnect(Login);
+export default withTranslationWorlds(withForm(Login));

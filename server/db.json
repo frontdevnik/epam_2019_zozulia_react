@@ -1,41 +1,26 @@
 {
   "movies": [
     {
-      "id": 1,
-      "title": "The Shawshank Redemptoin",
-      "posterUrl": "https://st.kp.yandex.net/im/poster/2/8/0/kinopoisk.ru-The-Shawshank-Redemption-2808223.jpg",
-      "stars": 4,
-      "likes": 25,
-      "genres": "Crime,Drama",
-      "actorsIds": [
-        0,
-        1,
-        2
-      ],
-      "director": "Frank Darabont",
-      "description": "Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he did not commit. The film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners, most notably a wise long-term inmate named Red."
-    },
-    {
       "id": 2,
-      "title": "The Godfather",
+      "title": "The Godfather1",
       "posterUrl": "https://fs.kinomania.ru/file/film_poster/f/b3/fb3a30a2e3e8abdcbf63f0aaaadb06e4.jpeg",
-      "stars": 4,
-      "likes": 7,
+      "stars": 2,
+      "likes": 16,
       "genres": "Crime,Drama",
       "actorsIds": [
         3,
         4,
         5
       ],
-      "director": "фывфывыфв",
+      "director": "a",
       "description": "When the aging head of a famous crime family decides to transfer his position to one of his subalterns, a series of unfortunate events start happening to the family, and a war begins between all the well-known families leading to insolence, deportation, murder and revenge, and ends with the favorable successor being finally chosen"
     },
     {
       "id": 3,
       "title": "The Godfather: Part II",
       "posterUrl": "https://st.kp.yandex.net/im/poster/2/3/5/kinopoisk.ru-The-Godfather_3A-Part-II-2353579--o--.jpg",
-      "stars": 4,
-      "likes": 12,
+      "stars": 1,
+      "likes": 6,
       "genres": "Crime,Drama",
       "actorsIds": [
         4,
@@ -117,7 +102,7 @@
       "title": "The Lord of the Rings: The Return of the King",
       "posterUrl": "https://i.pinimg.com/originals/ee/1e/6e/ee1e6e13f14c6218f897c875a8ba32da.jpg",
       "stars": 4,
-      "likes": 19,
+      "likes": 18,
       "genres": [
         "Adventure",
         "Drama",
@@ -151,8 +136,8 @@
     {
       "id": 11,
       "title": "The Lord of the Rings: The Fellowship of the Ring",
-      "posterUrl": "https://www.jayqowatch.com/wp-content/uploads/2019/07/the-lord-of-the-rings-the-fellowship-of-the-ring-948-poster.jpg",
-      "stars": 3,
+      "posterUrl": "https://wallpapertag.com/wallpaper/full/3/0/6/410977-cool-lord-of-the-rings-wallpaper-hd-1920x1080-windows-10.jpg",
+      "stars": 4,
       "likes": 15,
       "genres": [
         "Adventure",
@@ -505,6 +490,91 @@
       "name": "user",
       "password": "User",
       "id": 5
+    },
+    {
+      "name": "123",
+      "password": "A123",
+      "id": 6
+    },
+    {
+      "name": "Borow",
+      "password": "Boss",
+      "id": 7
+    },
+    {
+      "name": "asdasd",
+      "password": "Asdas",
+      "id": 8
+    },
+    {
+      "name": "Aasd",
+      "password": "Aasdasd",
+      "id": 9
+    },
+    {
+      "name": "Aasd",
+      "password": "AAsda",
+      "id": 10
+    },
+    {
+      "name": "Aasdasd",
+      "password": "Aasdasd",
+      "id": 11
+    },
+    {
+      "name": "Aasdas",
+      "password": "ADSasddas",
+      "id": 12
+    },
+    {
+      "name": "ASdasdd",
+      "password": "Asda",
+      "id": 13
+    },
+    {
+      "name": "1234",
+      "password": "A123",
+      "id": 14
+    },
+    {
+      "name": "123213",
+      "password": "Aasdasd",
+      "id": 15
+    },
+    {
+      "name": "ASDasd",
+      "password": "ADSASd",
+      "id": 16
+    },
+    {
+      "name": "a",
+      "password": "a",
+      "id": 17
+    },
+    {
+      "name": "aaa",
+      "password": "Aaaa",
+      "id": 18
+    },
+    {
+      "name": "aaa",
+      "password": "Aaaa",
+      "id": 19
+    },
+    {
+      "name": "123",
+      "password": "A123",
+      "id": 20
+    },
+    {
+      "name": "123",
+      "password": "A123",
+      "id": 21
+    },
+    {
+      "name": "123",
+      "password": "A1234",
+      "id": 22
     }
   ]
 }

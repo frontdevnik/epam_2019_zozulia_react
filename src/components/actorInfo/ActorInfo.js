@@ -1,23 +1,25 @@
-import React, { useEffect } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { fetchingActor, removeActor } from './actions';
-import Loading from '../loading/Loading';
-import Error from '../error/Error';
-import ActorInfoUI from './ActorInfoUI';
+import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { useParams } from "react-router-dom";
 
-function ActorInfo(props) {
+import Error from "../error/Error";
+import Loading from "../loading/Loading";
+import ActorInfoUI from "./ActorInfoUI";
+
+import { fetchingActor, removeActor } from "../../features/actor/actions";
+
+const ActorInfo = ({ actor, loading, error }) => {
+  const dispatch = useDispatch();
   const { id } = useParams();
-  const { fetchingActor, removeActor, actor, loading, error } = props;
 
   useEffect(() => {
-    fetchingActor(id);
+    dispatch(fetchingActor(id));
 
     return () => {
-      removeActor();
+      dispatch(removeActor());
     };
-  }, [fetchingActor, removeActor, id]);
+  }, [dispatch, id]);
 
   if (loading && !actor) {
     return <Loading />;
@@ -27,33 +29,20 @@ function ActorInfo(props) {
     return <Error />;
   }
 
-  return (
-    <ActorInfoUI actor={actor} />
-  );
-}
+  return <ActorInfoUI actor={actor} />;
+};
 
 ActorInfo.propTypes = {
-  actor: PropTypes.object,
+  actor: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    imgUrl: PropTypes.string,
+    biography: PropTypes.string,
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  }),
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.oneOf([null]),
-  ]),
-  fetchingActor: PropTypes.func,
-  removeActor: PropTypes.func,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])]),
 };
 
-const mapStateToProps = (state) => ({
-  actor: state.actorReducer.actor,
-  loading: state.actorReducer.loading,
-  error: state.actorReducer.error,
-});
-
-const mapDispatchToProps = {
-  fetchingActor,
-  removeActor,
-};
-
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
-
-export default withConnect(ActorInfo);
+export default ActorInfo;

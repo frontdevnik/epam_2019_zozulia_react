@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import RenderStar from '../renderStart/RenderStart';
-import style from './ratingStart.module.scss';
+import React from "react";
+import PropTypes from "prop-types";
+import RenderStar from "../renderStart/RenderStart";
+import style from "./ratingStart.module.scss";
 
 function RatingStart(props) {
   const { stars, id, movie } = props;

@@ -1,14 +1,14 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
-import api from '../../core/callApi';
-import { Routes } from '../../constans';
-import EditFilmForm from './EditFilmForm';
+import React from "react";
+import PropTypes from "prop-types";
+import { useHistory } from "react-router-dom";
 
-function EditFilm(props) {
-  const { movie } = props;
+import EditFilmForm from "./EditFilmForm";
 
+import { updateMovie } from "../../helpers/fetch-movie-api";
+
+import { HOME_PAGE } from "../../constants/path-constans";
+
+function EditFilm({ movie }) {
   const history = useHistory();
 
   const goBack = () => {
@@ -17,8 +17,9 @@ function EditFilm(props) {
 
   const updatePost = async (data) => {
     const updatedMovie = { ...movie, ...data };
-    await api(`movies/${movie.id}`, 'put', updatedMovie);
-    history.push(Routes.HOMEPAGE);
+    await updateMovie(movie.id, updatedMovie);
+
+    history.push(HOME_PAGE);
   };
 
   return (
@@ -40,10 +41,4 @@ EditFilm.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = (state) => ({
-  movie: state.choosenFilmReducer.choosenFilm,
-});
-
-const withConnect = connect(mapStateToProps);
-
-export default withConnect(EditFilm);
+export default EditFilm;
