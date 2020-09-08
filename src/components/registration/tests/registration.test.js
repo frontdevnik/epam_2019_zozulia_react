@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
-import RegistrationUI from "../RegistrationUI";
-import styles from "./registration.module.scss";
+import RegistrationUI from "../Registration";
+import styles from "../registration.module.scss";
 
 describe("<Registration />", () => {
   let wrapper;

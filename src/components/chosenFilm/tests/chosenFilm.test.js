@@ -1,55 +1,50 @@
 import React from "react";
-import { shallow } from "enzyme";
+import {useDispatch} from "react-redux";
+import Error from "../../error/Error";
+import Loading from "../../loading/Loading";
+import ChosenFilm from "../ChosenFilm";
 import ChosenFilmUI from "../ChosenFilmUI";
-import styles from "./chosenFilm.module.scss";
+import {
+    loadingProps,
+    errorProps,
+    chosenFilmProps,
+    chosenFilmId,
+    chosenFilmUIProps,
+} from './stubProps';
 
-describe("<ChosenFilmUI />", () => {
-  let wrapper;
+jest.mock('../../../features/choosenFilm/actions', () => ({
+    fetchingMovie: jest.fn()
+}))
+import {fetchingMovie} from "../../../features/choosenFilm/actions";
 
-  const props = {
-    editMovie: jest.fn(),
-    removeMovieById: jest.fn(),
-    removeMovie: jest.fn(() => props.removeMovieById),
-    choosenFilm_edit: "Edit",
-    choosenFilm_delete: "Delete",
-    actors: [],
-    choosenFilm_likes: "Likes",
-    choosenFilm_director: "Director",
-    choosenFilm_actors: "Actors",
-    choosenFilm_genres: "Genres",
-    choosenFilm_description: "Description",
-    movie: {
-      title: "Title",
-      posterUrl: "posterUrl",
-      stars: "4",
-      likes: "3",
-      genres: ["Genres"],
-      director: "Director",
-      description: "Description",
-      id: 1,
-    },
-  };
+jest.mock('react-redux', () => ({
+    useDispatch: jest.fn(() => f => f)
+}))
 
-  beforeEach(() => {
-    wrapper = shallow(<ChosenFilmUI {...props} />).dive();
-    jest.clearAllMocks();
-  });
+jest.mock('react-router', () => ({
+    useHistory: jest.fn(() => ({push: jest.fn()})),
+    useParams: jest.fn(() => ({id: 1})) // id: 1 = chosenFilmId from stabProps
+}))
 
-  it("should render correctly", () => {
-    expect(wrapper.debug()).toMatchSnapshot();
-  });
+const setUp = props => shallow(<ChosenFilm {...props} />);
 
-  it("should invoke editMovie after button click", () => {
-    const button = wrapper.find("button").at(0);
-    button.simulate("click");
-    expect(props.editMovie).toBeCalledTimes(1);
-    expect(button.text()).toEqual(props.choosenFilm_edit);
-  });
-
-  it("should invoke removeMovie after button click", () => {
-    const button = wrapper.find("button").at(1);
-    button.simulate("click");
-    expect(props.removeMovie()).toBeCalledTimes(1);
-    expect(button.text()).toEqual(props.choosenFilm_delete);
-  });
-});
+describe('<ChosenFilm />', () => {
+    it('should call fetchingMovie on componentDidMount', () => {
+       mount(<ChosenFilm {...chosenFilmProps} />);
+        expect(useDispatch).toHaveBeenCalled();
+        expect(fetchingMovie).toHaveBeenCalled();
+        expect(fetchingMovie).toHaveBeenCalledWith(chosenFilmId);
+    });
+    it('should render loading component', () => {
+        const component = setUp(loadingProps);
+        expect(component.equals(<Loading />)).toBeTruthy();
+    })
+    it('should render error component', () => {
+        const component = setUp(errorProps);
+        expect(component.equals(<Error />)).toBeTruthy();
+    })
+    it('should render <ChosenFilmUI /> component', () => {
+        const component = setUp(chosenFilmProps);
+        expect(component.matchesElement(<ChosenFilmUI />)).toBeTruthy();
+    })
+})

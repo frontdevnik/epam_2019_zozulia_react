@@ -1,13 +1,12 @@
 import React from "react";
 import { shallow } from "enzyme";
-import LoginUI from "../LoginUI";
-import styles from "./login.module.scss";
+import { TestLogin } from "../Login";
+import styles from "../login.module.scss";
 
-fdescribe("<Login />", () => {
+describe("<Login />", () => {
   let wrapper;
 
   const props = {
-    loginUser: jest.fn(),
     login_title: "Login Form",
     login_name: "Input your name",
     login_password: "Input your password",
@@ -17,14 +16,17 @@ fdescribe("<Login />", () => {
     link_to_registration: "Go to register page",
     login_name_placeholder: "Input your name",
     login_password_placeholder: "Input your password",
+    handleSubmit: jest.fn(),
+    onSubmit: jest.fn(),
+    errorText: jest.fn(),
   };
 
   beforeEach(() => {
-    wrapper = shallow(<LoginUI {...props} />).dive();
+    wrapper = shallow(<TestLogin {...props} />);
   });
 
   it("should render correctly", () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    expect(wrapper.html()).toMatchSnapshot();
   });
 
   it("should render title from props", () => {
@@ -52,6 +54,6 @@ fdescribe("<Login />", () => {
   it("should invoke loginUser after button click", () => {
     const button = wrapper.find("button");
     button.simulate("click");
-    expect(props.loginUser).toBeCalledTimes(1);
+    expect(props.handleSubmit).toBeCalledTimes(1);
   });
 });

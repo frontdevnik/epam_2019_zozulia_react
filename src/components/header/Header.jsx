@@ -65,6 +65,8 @@ const Header = ({
   );
 };
 
+export const TestHeader = Header;
+
 const withTranslationWords = withTranslation(['header_home_link', 'header_logout_link', 'header_login_link', 'header_registration_link', 'header_title']);
 
 export default withTranslationWords(Header);

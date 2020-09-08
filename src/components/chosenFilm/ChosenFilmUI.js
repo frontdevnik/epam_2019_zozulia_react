@@ -64,4 +64,6 @@ const withTranslationWords = withTranslation([
   "choosenFilm_description",
 ]);
 
+export const TestChosenFilmUI = ChosenFilmUI;
+
 export default withTranslationWords(ChosenFilmUI);

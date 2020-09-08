@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ChosenFilmUI /> should render correctly 1`] = `"<div class=\\"shortInfo\\"><h3>Title</h3><p>Likes:5</p><div class=\\"stars\\"><div class=\\"starActive\\"></div><div class=\\"starActive\\"></div><div class=\\"starActive\\"></div><div class=\\"starActive\\"></div><div class=\\"starActive\\"></div></div><div class=\\"buttonContainer\\"><button class=\\"changeButton\\">Likes</button><button class=\\"changeButton\\">Delete</button></div></div><article class=\\"fullInfo\\"><img class=\\"mainImg\\" src=\\"Url\\" alt=\\"Title\\"/><p><strong>Director: </strong>Director</p><p><strong>Actors: </strong>Actor</p><p><strong>Genres: </strong></p><p><strong>Description: </strong>Description</p></article>"`;

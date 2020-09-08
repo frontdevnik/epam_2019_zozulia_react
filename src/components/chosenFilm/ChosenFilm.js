@@ -84,7 +84,6 @@ ChosenFilm.propTypes = {
     description: PropTypes.string,
   }),
   actors: PropTypes.array.isRequired,
-  fetchingMovie: PropTypes.func,
   loading: PropTypes.bool.isRequired,
   error: PropTypes.oneOfType([PropTypes.string, PropTypes.oneOf([null])]),
 };
