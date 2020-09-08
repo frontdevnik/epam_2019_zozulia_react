@@ -1,6 +1,6 @@
 import React from "react";
 import { shallow } from "enzyme";
-import RegistrationUI from "../Registration";
+import {TestRegistration} from "../Registration";
 import styles from "../registration.module.scss";
 
 describe("<Registration />", () => {
@@ -17,14 +17,13 @@ describe("<Registration />", () => {
     link_to_login: "Go to login page",
     registration_name_placeholder: "Input your name",
     registration_password_placeholder: "Input your password",
+    handleSubmit: jest.fn(),
+    onSubmit: jest.fn(),
+    errorText: jest.fn()
   };
 
   beforeEach(() => {
-    wrapper = shallow(<RegistrationUI {...props} />).dive();
-  });
-
-  it("should render correctly", () => {
-    expect(wrapper.debug()).toMatchSnapshot();
+    wrapper = shallow(<TestRegistration {...props} />);
   });
 
   it("should render title from props", () => {
@@ -48,12 +47,12 @@ describe("<Registration />", () => {
   });
 
   it("should render empty incorrect paragraph", () => {
-    expect(wrapper.find("#incorrect").text()).toEqual("");
+    expect(wrapper.find("p").at(0).text()).toEqual("");
   });
 
   it("should invoke regUser after button click", () => {
     const button = wrapper.find("button");
     button.simulate("click");
-    expect(props.regUser).toBeCalledTimes(1);
+    expect(props.handleSubmit).toBeCalled();
   });
 });

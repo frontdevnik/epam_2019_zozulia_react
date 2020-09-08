@@ -12,7 +12,7 @@ import {
 
 import style from "./sorting.module.scss";
 
-function Sorting(props) {
+export const Sorting = (props) => {
   const {
     sorByLikes,
     sortByRating,

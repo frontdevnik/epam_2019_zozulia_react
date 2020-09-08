@@ -1,3 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Header /> should render correctly 1`] = `[Function]`;
+exports[`<Header /> should render correctly 1`] = `"<header class=\\"header\\"><div class=\\"langContainer\\"><span class=\\"lang\\">ukr </span>/<span class=\\"lang\\"> eng</span></div><a class=\\"link\\" href=\\"/home\\">home</a><p class=\\"link\\">logout</p></header><h1 class=\\"title\\">title</h1>"`;
+
+exports[`<Header /> should render correctly when user is not login render 1`] = `"<header class=\\"header\\"><div class=\\"langContainer\\"><span class=\\"lang\\">ukr </span>/<span class=\\"lang\\"> eng</span></div><div></div><div><a class=\\"link\\" href=\\"/registration\\">registration</a><a class=\\"link\\" href=\\"/login\\">login</a></div></header>"`;
+
+exports[`<Header /> should render correctly when user is not login should render 1`] = `"<header class=\\"header\\"><div class=\\"langContainer\\"><span class=\\"lang\\">ukr </span>/<span class=\\"lang\\"> eng</span></div><div></div><div><a class=\\"link\\" href=\\"/registration\\">registration</a><a class=\\"link\\" href=\\"/login\\">login</a></div></header>"`;
+
+exports[`<Header /> should render correctly when user login render 1`] = `"<header class=\\"header\\"><div class=\\"langContainer\\"><span class=\\"lang\\">ukr </span>/<span class=\\"lang\\"> eng</span></div><a class=\\"link\\" href=\\"/home\\">home</a><p class=\\"link\\">logout</p></header><h1 class=\\"title\\">title</h1>"`;
+
+exports[`<Header /> should render correctly when user login should render 1`] = `"<header class=\\"header\\"><div class=\\"langContainer\\"><span class=\\"lang\\">ukr </span>/<span class=\\"lang\\"> eng</span></div><a class=\\"link\\" href=\\"/home\\">home</a><p class=\\"link\\">logout</p></header><h1 class=\\"title\\">title</h1>"`;
+
+exports[`<Header /> should render correctly2 1`] = `"<header class=\\"header\\"><div class=\\"langContainer\\"><span class=\\"lang\\">ukr </span>/<span class=\\"lang\\"> eng</span></div><div></div><div><a class=\\"link\\" href=\\"/registration\\">registration</a><a class=\\"link\\" href=\\"/login\\">login</a></div></header>"`;
