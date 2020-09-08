@@ -1,5 +1,4 @@
 import React from "react";
-import { shallow } from "enzyme";
 import { TestLogin } from "../Login";
 import styles from "../login.module.scss";
 
@@ -23,10 +22,6 @@ describe("<Login />", () => {
 
   beforeEach(() => {
     wrapper = shallow(<TestLogin {...props} />);
-  });
-
-  it("should render correctly", () => {
-    expect(wrapper.html()).toMatchSnapshot();
   });
 
   it("should render title from props", () => {

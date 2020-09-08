@@ -26,6 +26,8 @@ function SortByName({ placeholder, handleSubmit }) {
   );
 }
 
+export const TestSortByName = SortByName;
+
 export default reduxForm({
   form: "Filter",
 })(SortByName);

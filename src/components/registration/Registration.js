@@ -52,6 +52,8 @@ const Registration = ({
   </section>
 );
 
+export const TestRegistration = Registration;
+
 const withForm = reduxForm({ form: "Registration" });
 const withTranslationWorlds = withTranslation([
   "registration_title",
