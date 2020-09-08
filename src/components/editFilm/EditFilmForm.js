@@ -62,4 +62,6 @@ const withTranslationWords = withTranslation([
   "editFilm_goBack",
 ]);
 
+export const TestEditFilmForm = EditFilmForm;
+
 export default withTranslationWords(withReduxForm(EditFilmForm));

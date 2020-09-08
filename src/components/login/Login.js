@@ -54,6 +54,8 @@ const Login = ({
   </section>
 );
 
+export const TestLogin = Login;
+
 const withForm = reduxForm({ form: "Login" });
 const withTranslationWorlds = withTranslation([
   "login_title",

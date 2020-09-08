@@ -39,4 +39,6 @@ const withTranslationWorlds = withTranslation([
   "actor_biography",
 ]);
 
+export const TestActorInfoUI = ActorInfoUI;
+
 export default withTranslationWorlds(ActorInfoUI);

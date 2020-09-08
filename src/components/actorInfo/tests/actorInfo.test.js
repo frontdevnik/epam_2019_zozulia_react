@@ -1,89 +1,49 @@
-import React from "react";
-import enzyme, { shallow } from "enzyme";
-import configureStore from "redux-mock-store";
-import { Provider } from "react-redux";
+import React from 'react';
+import {useDispatch} from "react-redux";
+import Loading from "../../loading/Loading";
+import Error from "../../error/Error";
 import ActorInfo from "../ActorInfo";
-import * as actions from "../actions";
-import * as types from "../types";
+import ActorInfoUI from "../ActorInfoUI";
 
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
-  useParams: () => ({
-    match: {
-      params: { id: 1 },
-    },
-  }),
+import {
+    loadingProps,
+    errorProps,
+    actorProps,
+    actorId
+} from "./stabProps";
+
+jest.mock('../../../features/actor/actions', () => ({
+    fetchingActor: jest.fn(),
+    removeActor: jest.fn()
+}))
+import { fetchingActor } from "../../../features/actor/actions";
+
+jest.mock('react-redux', () => ({
+    useDispatch: jest.fn(() => (f) => f)
 }));
+jest.mock('react-router', () => ({
+    useParams: jest.fn(() => ({id: 1})) // id: 1 = actorId from stabProps
+}))
 
-describe("<ActorInfo />", () => {
-  let wrapper;
-  let instance;
-  let store;
-  const initialState = {
-    actorReducer: {
-      actor: null,
-      loading: true,
-      error: null,
-    },
-  };
-  const mockStore = configureStore();
+const setUp = (props) => shallow(<ActorInfo {...props} />);
 
-  const props = {
-    id: 3,
-  };
-
-  beforeEach(() => {
-    store = mockStore(initialState);
-    wrapper = shallow(
-      <Provider store={store}>
-        <ActorInfo {...props} />
-      </Provider>
-    );
-    instance = wrapper.instance();
-  });
-
-  it("should render loading", () => {
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it("should render error", () => {
-    store = mockStore({
-      actorReducer: {
-        actor: null,
-        loading: false,
-        error: true,
-      },
+describe('<ActorInfo />', () => {
+    it('should call fetchActors on componentDidMount', () => {
+        mount(<ActorInfo {...actorProps} />);
+        expect(useDispatch).toHaveBeenCalled();
+        expect(fetchingActor).toHaveBeenCalled();
+        expect(fetchingActor).toHaveBeenCalledWith(actorId);
     });
-    wrapper = shallow(
-      <Provider store={store}>
-        <ActorInfo {...props} />
-      </Provider>
-    );
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  it("should render actor", () => {
-    store = mockStore({
-      actorReducer: {
-        actor: {},
-        loading: false,
-        error: null,
-      },
-    });
-    wrapper = shallow(
-      <Provider store={store}>
-        <ActorInfo {...props} />
-      </Provider>
-    );
-    expect(wrapper.html()).toMatchSnapshot();
-  });
-
-  describe("actions", () => {
-    it("should remove actor from store", () => {
-      const expectedAction = {
-        type: types.REMOVE_ACTOR,
-      };
-      expect(actions.removeActor()).toEqual(expectedAction);
-    });
-  });
-});
+    it('should render loading component', () => {
+        const component = setUp(loadingProps);
+        expect(component.equals(<Loading />)).toBeTruthy()
+    })
+    it('should render error component', () => {
+        const component = setUp(errorProps);
+        expect(component.equals(<Error />)).toBeTruthy()
+    })
+    it('should render <ActorInfo /> component', () => {
+        const component = setUp(actorProps);
+        expect(component.matchesElement(<ActorInfoUI />)).toBeTruthy();
+    })
+})
