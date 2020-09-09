@@ -1,20 +1,21 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
-import PropTypes, { number } from "prop-types";
+import React, { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory, useParams } from 'react-router-dom';
+import PropTypes, { number } from 'prop-types';
+import { LoadingWrapper } from '../../hocs/loadingWrapper';
 
-import Loading from "../loading/Loading";
-import Error from "../error/Error";
-import ChosenFilmUI from "./ChosenFilmUI";
+import ChosenFilmUI from './ChosenFilmUI';
 
-import { fetchingMovie } from "../../features/choosenFilm/actions";
-import { deleteMovie } from "../../helpers/fetch-movie-api";
+import { fetchingMovie } from '../../features/choosenFilm/actions';
+import { deleteMovie } from '../../helpers/fetch-movie-api';
 
-import { HOME_PAGE, ACTOR_PAGE } from "../../constants/path-constans";
+import { HOME_PAGE, ACTOR_PAGE } from '../../constants/path-constans';
 
-import style from "./chosenFilm.module.scss";
+import style from './chosenFilm.module.scss';
 
-function ChosenFilm({ loading, movie, error, actors }) {
+function ChosenFilm({
+  loading, movie, error, actors,
+}) {
   const history = useHistory();
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -22,14 +23,6 @@ function ChosenFilm({ loading, movie, error, actors }) {
   useEffect(() => {
     dispatch(fetchingMovie(id));
   }, [dispatch, id]);
-
-  if (loading && !movie) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <Error />;
-  }
 
   const { actorsIds } = movie;
   const actorsArr = actors;
@@ -40,13 +33,13 @@ function ChosenFilm({ loading, movie, error, actors }) {
       ModifiedActors.push(
         <span key={actor.id} onClick={showActor(actor)} className={style.actor}>
           {actor.name}
-        </span>
+        </span>,
       );
     }
   });
 
   const editMovie = () => {
-    history.push(history.location.pathname + "/edit");
+    history.push(`${history.location.pathname}/edit`);
   };
 
   const removeMovie = (id) => async () => {
@@ -57,17 +50,19 @@ function ChosenFilm({ loading, movie, error, actors }) {
 
   function showActor(actor) {
     return () => {
-      history.push(ACTOR_PAGE + `/${actor.id}`);
+      history.push(`${ACTOR_PAGE}/${actor.id}`);
     };
   }
 
   return (
-    <ChosenFilmUI
-      movie={movie}
-      actors={ModifiedActors}
-      editMovie={editMovie}
-      removeMovie={removeMovie}
-    />
+    <LoadingWrapper loading={loading && !movie} error={error}>
+      <ChosenFilmUI
+        movie={movie}
+        actors={ModifiedActors}
+        editMovie={editMovie}
+        removeMovie={removeMovie}
+      />
+    </LoadingWrapper>
   );
 }
 

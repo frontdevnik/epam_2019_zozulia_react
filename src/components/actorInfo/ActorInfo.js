@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
-import { useDispatch } from "react-redux";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
 
-import Error from "../error/Error";
-import Loading from "../loading/Loading";
-import ActorInfoUI from "./ActorInfoUI";
+import ActorInfoUI from './ActorInfoUI';
+import { LoadingWrapper } from '../../hocs/loadingWrapper';
 
-import { fetchingActor, removeActor } from "../../features/actor/actions";
+import { fetchingActor, removeActor } from '../../features/actor/actions';
 
 const ActorInfo = ({ actor, loading, error }) => {
   const dispatch = useDispatch();
@@ -21,15 +20,11 @@ const ActorInfo = ({ actor, loading, error }) => {
     };
   }, [dispatch, id]);
 
-  if (loading && !actor) {
-    return <Loading />;
-  }
-
-  if (error) {
-    return <Error />;
-  }
-
-  return <ActorInfoUI actor={actor} />;
+  return (
+    <LoadingWrapper loading={loading && !actor} error={error}>
+      <ActorInfoUI actor={actor} />
+    </LoadingWrapper>
+  );
 };
 
 ActorInfo.propTypes = {
